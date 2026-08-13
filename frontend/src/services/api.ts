@@ -1,6 +1,9 @@
 import type { CreateQuizPayload, Quiz, QuizListItem } from '@/types/quiz';
 
-const API_BASE_URL = (process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:5000').replace(/\/$/, '');
+const API_BASE_URL = (process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:5000').replace(
+  /\/$/,
+  '',
+);
 
 type ApiSuccess<T> = {
   success: true;

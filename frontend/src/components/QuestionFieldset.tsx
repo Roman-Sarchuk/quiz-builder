@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import type {
   Control,
@@ -6,12 +6,12 @@ import type {
   UseFormRegister,
   UseFormSetValue,
   UseFormWatch,
-} from "react-hook-form";
+} from 'react-hook-form';
 
-import type { CreateQuizFormValues } from "@/schemas/quiz.schema";
+import type { CreateQuizFormValues } from '@/schemas/quiz.schema';
 
 type QuestionFieldsetProps = {
-  field: FieldArrayWithId<CreateQuizFormValues, "questions">;
+  field: FieldArrayWithId<CreateQuizFormValues, 'questions'>;
   index: number;
   register: UseFormRegister<CreateQuizFormValues>;
   control: Control<CreateQuizFormValues>;
@@ -53,7 +53,7 @@ export function QuestionFieldset({
   };
 
   const addOption = () => {
-    const nextOptions = [...checkboxOptions, ""];
+    const nextOptions = [...checkboxOptions, ''];
     setValue(`questions.${index}.options`, nextOptions, {
       shouldDirty: true,
       shouldValidate: true,
@@ -96,7 +96,7 @@ export function QuestionFieldset({
   return (
     <div key={field.id} className="rounded-2xl border border-zinc-200 bg-zinc-50 p-4">
       <div className="mb-4 flex items-center justify-between gap-3">
-        <p className="text-sm font-semibold uppercase tracking-[0.2em] text-zinc-500">
+        <p className="text-sm font-semibold tracking-[0.2em] text-zinc-500 uppercase">
           Question {index + 1}
         </p>
 
@@ -127,7 +127,7 @@ export function QuestionFieldset({
                 shouldValidate: true,
               });
             }}
-            className="w-full rounded-xl border border-zinc-300 bg-white px-3 py-2.5 outline-none transition focus:border-violet-500"
+            className="w-full rounded-xl border border-zinc-300 bg-white px-3 py-2.5 transition outline-none focus:border-violet-500"
           >
             <option value="BOOLEAN">BOOLEAN</option>
             <option value="INPUT">INPUT</option>
@@ -139,12 +139,12 @@ export function QuestionFieldset({
           <label className="mb-2 block text-sm font-medium text-zinc-700">Question text</label>
           <input
             {...register(`questions.${index}.text`)}
-            className="w-full rounded-xl border border-zinc-300 bg-white px-3 py-2.5 outline-none transition focus:border-violet-500"
+            className="w-full rounded-xl border border-zinc-300 bg-white px-3 py-2.5 transition outline-none focus:border-violet-500"
             placeholder="Type your question here"
           />
         </div>
 
-        {questionType === "BOOLEAN" && (
+        {questionType === 'BOOLEAN' && (
           <div>
             <label className="mb-2 block text-sm font-medium text-zinc-700">Answer</label>
             <div className="flex items-center gap-3 rounded-xl border border-zinc-300 bg-white p-3">
@@ -163,18 +163,18 @@ export function QuestionFieldset({
           </div>
         )}
 
-        {questionType === "INPUT" && (
+        {questionType === 'INPUT' && (
           <div>
             <label className="mb-2 block text-sm font-medium text-zinc-700">Expected answer</label>
             <input
               {...register(`questions.${index}.answers`)}
-              className="w-full rounded-xl border border-zinc-300 bg-white px-3 py-2.5 outline-none transition focus:border-violet-500"
+              className="w-full rounded-xl border border-zinc-300 bg-white px-3 py-2.5 transition outline-none focus:border-violet-500"
               placeholder="e.g. Paris"
             />
           </div>
         )}
 
-        {questionType === "CHECKBOX" && (
+        {questionType === 'CHECKBOX' && (
           <div>
             <div className="mb-2 flex items-center justify-between gap-2">
               <label className="text-sm font-medium text-zinc-700">Options</label>
@@ -193,7 +193,7 @@ export function QuestionFieldset({
                   <input
                     value={option}
                     onChange={(event) => updateOption(optionIndex, event.target.value)}
-                    className="w-full rounded-xl border border-zinc-300 bg-white px-3 py-2.5 outline-none transition focus:border-violet-500"
+                    className="w-full rounded-xl border border-zinc-300 bg-white px-3 py-2.5 transition outline-none focus:border-violet-500"
                     placeholder={`Option ${optionIndex + 1}`}
                   />
 
@@ -212,7 +212,9 @@ export function QuestionFieldset({
 
             {checkboxOptions.length > 0 && (
               <div className="mt-4">
-                <label className="mb-2 block text-sm font-medium text-zinc-700">Correct answers</label>
+                <label className="mb-2 block text-sm font-medium text-zinc-700">
+                  Correct answers
+                </label>
                 <div className="space-y-2">
                   {checkboxOptions.map((option, optionIndex) => (
                     <label

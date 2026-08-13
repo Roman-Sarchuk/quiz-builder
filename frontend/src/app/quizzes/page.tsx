@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import { useEffect, useState } from "react";
+import Link from 'next/link';
+import { useEffect, useState } from 'react';
 
-import { QuizListItem } from "@/components/QuizListItem";
-import { deleteQuiz, getQuizzes } from "@/services/api";
-import type { QuizListItem as QuizListItemType } from "@/types/quiz";
+import { QuizListItem } from '@/components/QuizListItem';
+import { deleteQuiz, getQuizzes } from '@/services/api';
+import type { QuizListItem as QuizListItemType } from '@/types/quiz';
 
 export default function QuizzesPage() {
   const [quizzes, setQuizzes] = useState<QuizListItemType[]>([]);
@@ -26,7 +26,7 @@ export default function QuizzesPage() {
         }
       } catch (err) {
         if (isMounted) {
-          setError(err instanceof Error ? err.message : "Unable to load quizzes.");
+          setError(err instanceof Error ? err.message : 'Unable to load quizzes.');
         }
       } finally {
         if (isMounted) {
@@ -47,7 +47,7 @@ export default function QuizzesPage() {
       await deleteQuiz(id);
       setQuizzes((current) => current.filter((quiz) => quiz.id !== id));
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Unable to delete quiz.");
+      setError(err instanceof Error ? err.message : 'Unable to delete quiz.');
     }
   };
 
@@ -56,7 +56,7 @@ export default function QuizzesPage() {
       <div className="mx-auto max-w-4xl">
         <div className="mb-6 flex items-center justify-between gap-3">
           <div>
-            <p className="text-sm font-medium uppercase tracking-[0.2em] text-violet-600">Quiz</p>
+            <p className="text-sm font-medium tracking-[0.2em] text-violet-600 uppercase">Quiz</p>
             <h1 className="mt-2 text-3xl font-bold">All quizzes</h1>
           </div>
 

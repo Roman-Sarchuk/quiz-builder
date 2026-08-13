@@ -1,14 +1,10 @@
-import Link from "next/link";
-import { notFound } from "next/navigation";
+import Link from 'next/link';
+import { notFound } from 'next/navigation';
 
-import { QuestionPreview } from "@/components/QuestionPreview";
-import { getQuizById } from "@/services/api";
+import { QuestionPreview } from '@/components/QuestionPreview';
+import { getQuizById } from '@/services/api';
 
-export default async function QuizDetailPage({
-  params,
-}: {
-  params: Promise<{ id: string }>;
-}) {
+export default async function QuizDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
 
   let quiz;
@@ -16,7 +12,7 @@ export default async function QuizDetailPage({
   try {
     quiz = await getQuizById(id);
   } catch (error) {
-    if (error instanceof Error && error.message.includes("not found")) {
+    if (error instanceof Error && error.message.includes('not found')) {
       notFound();
     }
 
@@ -28,7 +24,7 @@ export default async function QuizDetailPage({
       <div className="mx-auto max-w-4xl rounded-3xl border border-zinc-200 bg-white p-6 shadow-sm">
         <div className="mb-6 flex items-center justify-between gap-3">
           <div>
-            <p className="text-sm font-medium uppercase tracking-[0.2em] text-violet-600">Quiz</p>
+            <p className="text-sm font-medium tracking-[0.2em] text-violet-600 uppercase">Quiz</p>
             <h1 className="mt-2 text-3xl font-bold">{quiz.title}</h1>
           </div>
 

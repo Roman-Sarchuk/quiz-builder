@@ -50,9 +50,7 @@ type CheckboxQuestionInput = {
 };
 
 export type CreateQuestionPayload =
-  | BooleanQuestionInput
-  | InputQuestionInput
-  | CheckboxQuestionInput;
+  BooleanQuestionInput | InputQuestionInput | CheckboxQuestionInput;
 
 export type CreateQuizPayload = {
   title: string;
