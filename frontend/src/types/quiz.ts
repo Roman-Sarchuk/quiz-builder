@@ -31,14 +31,14 @@ export interface QuizListItem {
 type BooleanQuestionInput = {
   type: 'BOOLEAN';
   text: string;
-  options?: null;
+  options?: string[] | null;
   answers?: boolean | null;
 };
 
 type InputQuestionInput = {
   type: 'INPUT';
   text: string;
-  options?: null;
+  options?: string[] | null;
   answers?: string | null;
 };
 

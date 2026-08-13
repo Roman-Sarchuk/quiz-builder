@@ -3,14 +3,14 @@ import { z } from 'zod';
 const booleanQuestionSchema = z.object({
   type: z.literal('BOOLEAN'),
   text: z.string().trim().min(1, 'Question text is required'),
-  options: z.array(z.string().trim().min(1)).nullable().optional(),
+  options: z.null().optional(),
   answers: z.boolean().optional(),
 });
 
 const inputQuestionSchema = z.object({
   type: z.literal('INPUT'),
   text: z.string().trim().min(1, 'Question text is required'),
-  options: z.array(z.string().trim().min(1)).nullable().optional(),
+  options: z.null().optional(),
   answers: z.string().trim().min(1).optional(),
 });
 

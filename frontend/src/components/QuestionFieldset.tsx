@@ -30,9 +30,14 @@ export function QuestionFieldset({
   removeQuestion,
   canRemove,
 }: QuestionFieldsetProps) {
-  const questionType = watch(`questions.${index}.type`);
-  const checkboxOptions = watch(`questions.${index}.options`) ?? [];
-  const checkboxAnswers = watch(`questions.${index}.answers`) ?? [];
+  const questionType = (watch(`questions.${index}.type`) ?? 'BOOLEAN') as
+    'BOOLEAN' | 'INPUT' | 'CHECKBOX';
+  const checkboxOptions = Array.isArray(watch(`questions.${index}.options`))
+    ? (watch(`questions.${index}.options`) as string[])
+    : [];
+  const checkboxAnswers = Array.isArray(watch(`questions.${index}.answers`))
+    ? (watch(`questions.${index}.answers`) as string[])
+    : [];
 
   const updateOption = (optionIndex: number, value: string) => {
     const nextOptions = [...checkboxOptions];
@@ -42,7 +47,7 @@ export function QuestionFieldset({
       shouldValidate: true,
     });
 
-    const answerSet = new Set(checkboxAnswers);
+    const answerSet = new Set<string>(checkboxAnswers);
     if (!value.trim()) {
       answerSet.delete(nextOptions[optionIndex]);
     }
@@ -79,7 +84,7 @@ export function QuestionFieldset({
       return;
     }
 
-    const nextAnswers = new Set(checkboxAnswers);
+    const nextAnswers = new Set<string>(checkboxAnswers);
 
     if (nextAnswers.has(option)) {
       nextAnswers.delete(option);
