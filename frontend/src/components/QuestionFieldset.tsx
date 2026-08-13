@@ -80,6 +80,17 @@ export function QuestionFieldset({
           <label className="mb-2 block text-sm font-medium text-zinc-700">Question type</label>
           <select
             {...register(`questions.${index}.type`)}
+            onChange={(event) => {
+              register(`questions.${index}.type`).onChange(event);
+              setValue(`questions.${index}.answers`, undefined, {
+                shouldDirty: true,
+                shouldValidate: true,
+              });
+              setValue(`questions.${index}.options`, undefined, {
+                shouldDirty: true,
+                shouldValidate: true,
+              });
+            }}
             className="w-full rounded-xl border border-zinc-300 bg-white px-3 py-2.5 outline-none transition focus:border-violet-500"
           >
             <option value="BOOLEAN">BOOLEAN</option>

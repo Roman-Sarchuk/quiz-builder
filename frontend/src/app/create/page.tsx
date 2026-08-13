@@ -42,6 +42,7 @@ export default function CreateQuizPage() {
     try {
       await createQuiz(values);
       router.push("/quizzes");
+      router.refresh();
     } catch (error) {
       console.error(error);
     }
