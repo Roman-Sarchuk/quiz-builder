@@ -32,6 +32,7 @@ export function QuestionFieldset({
 }: QuestionFieldsetProps) {
   const questionType = watch(`questions.${index}.type`);
   const checkboxOptions = watch(`questions.${index}.options`) ?? [];
+  const checkboxAnswers = watch(`questions.${index}.answers`) ?? [];
 
   const updateOption = (optionIndex: number, value: string) => {
     const nextOptions = [...checkboxOptions];
@@ -40,10 +41,20 @@ export function QuestionFieldset({
       shouldDirty: true,
       shouldValidate: true,
     });
+
+    const answerSet = new Set(checkboxAnswers);
+    if (!value.trim()) {
+      answerSet.delete(nextOptions[optionIndex]);
+    }
+    setValue(`questions.${index}.answers`, Array.from(answerSet), {
+      shouldDirty: true,
+      shouldValidate: true,
+    });
   };
 
   const addOption = () => {
-    setValue(`questions.${index}.options`, [...checkboxOptions, ""], {
+    const nextOptions = [...checkboxOptions, ""];
+    setValue(`questions.${index}.options`, nextOptions, {
       shouldDirty: true,
       shouldValidate: true,
     });
@@ -51,7 +62,32 @@ export function QuestionFieldset({
 
   const removeOption = (optionIndex: number) => {
     const nextOptions = checkboxOptions.filter((_, currentIndex) => currentIndex !== optionIndex);
+    const nextAnswers = checkboxAnswers.filter((answer) => answer !== checkboxOptions[optionIndex]);
+
     setValue(`questions.${index}.options`, nextOptions, {
+      shouldDirty: true,
+      shouldValidate: true,
+    });
+    setValue(`questions.${index}.answers`, nextAnswers, {
+      shouldDirty: true,
+      shouldValidate: true,
+    });
+  };
+
+  const toggleCheckboxAnswer = (option: string) => {
+    if (!option.trim()) {
+      return;
+    }
+
+    const nextAnswers = new Set(checkboxAnswers);
+
+    if (nextAnswers.has(option)) {
+      nextAnswers.delete(option);
+    } else {
+      nextAnswers.add(option);
+    }
+
+    setValue(`questions.${index}.answers`, Array.from(nextAnswers), {
       shouldDirty: true,
       shouldValidate: true,
     });
@@ -173,6 +209,28 @@ export function QuestionFieldset({
                 </div>
               ))}
             </div>
+
+            {checkboxOptions.length > 0 && (
+              <div className="mt-4">
+                <label className="mb-2 block text-sm font-medium text-zinc-700">Correct answers</label>
+                <div className="space-y-2">
+                  {checkboxOptions.map((option, optionIndex) => (
+                    <label
+                      key={`${field.id}-answer-${optionIndex}`}
+                      className="flex items-center gap-3 rounded-xl border border-zinc-300 bg-white px-3 py-2 text-sm text-zinc-700"
+                    >
+                      <input
+                        type="checkbox"
+                        checked={Boolean(option.trim()) && checkboxAnswers.includes(option)}
+                        disabled={!option.trim()}
+                        onChange={() => toggleCheckboxAnswer(option)}
+                      />
+                      <span>{option.trim() || `Option ${optionIndex + 1}`}</span>
+                    </label>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         )}
       </div>
