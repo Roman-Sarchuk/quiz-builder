@@ -33,6 +33,18 @@ Quiz Builder is a full-stack JavaScript assessment project for creating and mana
 /docker-compose.yml
 ```
 
+## 📸 Project Preview
+<details>
+  <summary><b>UI photos</b></summary>
+  <br/>
+  
+  | <img width="409" height="866" alt="image" src="https://github.com/user-attachments/assets/c84807dd-d011-4064-a6cc-850d376cc6fd" /> | <img width="407" height="860" alt="image" src="https://github.com/user-attachments/assets/df6781aa-167e-4d89-9495-6a19d25a5ecf" /> |
+  | :-: | :-: |
+  | <img width="406" height="862" alt="image" src="https://github.com/user-attachments/assets/ed7b6c08-ba65-4954-8a67-31c9a28342f0" /> | <img width="408" height="861" alt="image" src="https://github.com/user-attachments/assets/ea4d96a3-3af4-45b9-9c23-6b04b1473fe7" /> |
+  
+</details>
+
+
 ## 🚀 Quick Start
 
 The fastest and recommended way to run the project is with Docker Compose. No manual .env file creation is needed for this method.
