@@ -15,7 +15,9 @@ const inputQuestionSchema = z.object({
 const checkboxQuestionSchema = z.object({
   type: z.literal('CHECKBOX'),
   text: z.string().trim().min(1, 'Question text is required'),
-  options: z.array(z.string().trim().min(1)).min(2, 'Checkbox questions require at least 2 options'),
+  options: z
+    .array(z.string().trim().min(1))
+    .min(2, 'Checkbox questions require at least 2 options'),
   answers: z.array(z.string().trim().min(1)).optional(),
 });
 
