@@ -2,9 +2,9 @@ import type { CreateQuizPayload, Quiz, QuizListItem } from '@/types/quiz';
 
 const API_BASE_URL = (
   typeof window === 'undefined'
-    ? 'http://backend:5000' // Server-side (запит всередині Docker-мережі)
+    ? (process.env.INTERNAL_API_URL ?? 'http://localhost:5000')
     : (process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:5000')
-) // Client-side (запит з браузера)
+) 
   .replace(/\/$/, '');
 
 type ApiSuccess<T> = {
