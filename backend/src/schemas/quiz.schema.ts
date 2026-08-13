@@ -1,7 +1,5 @@
 import { z } from 'zod';
 
-const questionTypeEnum = z.enum(['BOOLEAN', 'INPUT', 'CHECKBOX']);
-
 const booleanQuestionSchema = z.object({
   type: z.literal('BOOLEAN'),
   text: z.string().trim().min(1, 'Question text is required'),
@@ -32,6 +30,6 @@ export const createQuizSchema = z.object({
   questions: z.array(quizQuestionSchema).min(1, 'At least one question is required'),
 });
 
-export type QuestionType = z.infer<typeof questionTypeEnum>;
+export type QuestionType = 'BOOLEAN' | 'INPUT' | 'CHECKBOX';
 export type QuizQuestion = z.infer<typeof quizQuestionSchema>;
 export type CreateQuizInput = z.infer<typeof createQuizSchema>;
