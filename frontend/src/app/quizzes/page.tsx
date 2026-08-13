@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 
 import { QuizListItem } from "@/components/QuizListItem";
-import { deleteQuiz, getQuizzes } from "@/lib/api";
+import { deleteQuiz, getQuizzes } from "@/services/api";
 import type { QuizListItem as QuizListItemType } from "@/types/quiz";
 
 export default function QuizzesPage() {

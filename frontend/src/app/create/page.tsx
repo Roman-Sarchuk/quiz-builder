@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { useFieldArray, useForm } from "react-hook-form";
 
 import { QuestionFieldset } from "@/components/QuestionFieldset";
-import { createQuiz } from "@/lib/api";
+import { createQuiz } from "@/services/api";
 import { createQuizSchema } from "@/schemas/quiz.schema";
 import type { CreateQuizFormValues } from "@/schemas/quiz.schema";
 

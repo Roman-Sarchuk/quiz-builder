@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 
 import { QuestionPreview } from "@/components/QuestionPreview";
-import { getQuizById } from "@/lib/api";
+import { getQuizById } from "@/services/api";
 
 export default async function QuizDetailPage({
   params,
