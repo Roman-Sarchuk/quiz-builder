@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 import { QuizListItem } from "@/components/QuizListItem";
@@ -11,21 +12,34 @@ export default function QuizzesPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const loadQuizzes = async () => {
-    try {
-      setIsLoading(true);
-      setError(null);
-      const data = await getQuizzes();
-      setQuizzes(data);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Unable to load quizzes.");
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
   useEffect(() => {
-    void loadQuizzes();
+    let isMounted = true;
+
+    const fetchQuizzes = async () => {
+      try {
+        setIsLoading(true);
+        setError(null);
+        const data = await getQuizzes();
+
+        if (isMounted) {
+          setQuizzes(data);
+        }
+      } catch (err) {
+        if (isMounted) {
+          setError(err instanceof Error ? err.message : "Unable to load quizzes.");
+        }
+      } finally {
+        if (isMounted) {
+          setIsLoading(false);
+        }
+      }
+    };
+
+    void fetchQuizzes();
+
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   const handleDelete = async (id: string) => {
@@ -46,20 +60,28 @@ export default function QuizzesPage() {
             <h1 className="mt-2 text-3xl font-bold">All quizzes</h1>
           </div>
 
-          <a
+          <Link
             href="/create"
             className="rounded-lg bg-violet-600 px-4 py-2.5 text-sm font-medium text-white hover:bg-violet-500"
           >
             Create quiz
-          </a>
+          </Link>
         </div>
 
-        {error && <p className="mb-4 rounded-xl border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700">{error}</p>}
+        {error && (
+          <p className="mb-4 rounded-xl border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700">
+            {error}
+          </p>
+        )}
 
         {isLoading ? (
-          <p className="rounded-2xl border border-zinc-200 bg-white p-6 text-sm text-zinc-500">Loading quizzes...</p>
+          <p className="rounded-2xl border border-zinc-200 bg-white p-6 text-sm text-zinc-500">
+            Loading quizzes...
+          </p>
         ) : quizzes.length === 0 ? (
-          <p className="rounded-2xl border border-zinc-200 bg-white p-6 text-sm text-zinc-500">No quizzes yet. Create the first one.</p>
+          <p className="rounded-2xl border border-zinc-200 bg-white p-6 text-sm text-zinc-500">
+            No quizzes yet. Create the first one.
+          </p>
         ) : (
           <ul className="space-y-4">
             {quizzes.map((quiz) => (
