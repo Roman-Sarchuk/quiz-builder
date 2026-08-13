@@ -60,17 +60,6 @@ The fastest and recommended way to run the project is with Docker Compose. No ma
 	 - UI: http://localhost:3000
 	 - API: http://localhost:5000
 
-## 🗄️ Database Setup
-
-The backend uses PostgreSQL and Prisma.
-
-- The database is defined in `docker-compose.yml`.
-- Prisma schema lives in `backend/prisma/schema.prisma`.
-- Migrations are applied with `prisma migrate dev`.
-- Sample data is loaded with `prisma db seed`.
-
-If you want to reset the database and reload the sample data, you can rerun the migration and seed commands above.
-
 ## 🛠️ Local Development Setup
 
 If you prefer running the Node.js and Next.js apps locally on your host machine instead of fully using Docker, you still need the PostgreSQL database running.
